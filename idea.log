@@ -1,0 +1,11 @@
+Build file '/home/user/AndroidStudioProjects/MyApplication/app/build.gradle.kts' line: 1
+
+Error resolving plugin [id: 'org.jetbrains.kotlin.kapt', version: '2.0.21']
+> The request for this plugin could not be satisfied because the plugin is already on the classpath with an unknown version, so compatibility cannot be checked.
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+BUILD FAILED in 456ms

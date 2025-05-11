@@ -18,21 +18,27 @@
 
     <item
         android:id="@+id/navigation_calendar"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_dashboard_black_24dp" <!-- Consider a unique calendar icon -->
         android:title="@string/title_calendar" />
 
     <item
+        android:id="@+id/navigation_todo"
+        android:icon="@android:drawable/ic_menu_agenda" <!-- Placeholder, replace with actual icon -->
+        android:title="@string/title_todo" />
+
+    <item
         android:id="@+id/navigation_gantt"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_dashboard_black_24dp" <!-- Consider a unique gantt icon -->
         android:title="@string/title_gantt" />
+
+    <item
+        android:id="@+id/navigation_ai_planner"
+        android:icon="@drawable/ic_dashboard_black_24dp" <!-- Consider a unique planner icon -->
+        android:title="@string/title_ai_planner" />
 
     <item
         android:id="@+id/navigation_ai_settings"
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/title_ai_settings" />
 
-    <item
-        android:id="@+id/navigation_ai_planner"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_ai_planner" />
 </menu>

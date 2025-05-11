@@ -3,10 +3,13 @@ package com.todo.mygo.calendar.data
 import androidx.lifecycle.LiveData
 import com.todo.mygo.gantt.data.PlannedTask
 import com.todo.mygo.gantt.data.PlannedTaskDao
+import com.todo.mygo.todo.data.TodoItem // Added import
+import com.todo.mygo.todo.data.TodoDao   // Added import
 
 class CalendarRepository(
     private val eventDao: EventDao,
-    private val plannedTaskDao: PlannedTaskDao // Added PlannedTaskDao
+    private val plannedTaskDao: PlannedTaskDao,
+    private val todoDao: TodoDao // Added TodoDao
 ) {
 
     val allEvents: LiveData<List<Event>> = eventDao.getAllEvents()
@@ -63,5 +66,36 @@ class CalendarRepository(
 
     suspend fun clearAllPlannedTasks() {
         plannedTaskDao.clearAllPlannedTasks()
+    }
+
+    // TodoItem methods
+    val allTodoItems: LiveData<List<TodoItem>> = todoDao.getAllTodoItems()
+
+    suspend fun insertTodoItem(todoItem: TodoItem) {
+        todoDao.insert(todoItem)
+    }
+
+    suspend fun updateTodoItem(todoItem: TodoItem) {
+        todoDao.update(todoItem)
+    }
+
+    suspend fun deleteTodoItem(todoItem: TodoItem) {
+        todoDao.delete(todoItem)
+    }
+
+    suspend fun getTodoItemById(id: String): TodoItem? {
+        return todoDao.getTodoItemById(id)
+    }
+
+    fun getTodoItemsByCompletionStatus(completed: Boolean): LiveData<List<TodoItem>> {
+        return todoDao.getTodoItemsByCompletionStatus(completed)
+    }
+
+    fun getTodoItemsByGroupId(groupId: String): LiveData<List<TodoItem>> {
+        return todoDao.getTodoItemsByGroupId(groupId)
+    }
+
+    fun getTodoItemsByParentId(parentId: String): LiveData<List<TodoItem>> {
+        return todoDao.getTodoItemsByParentId(parentId)
     }
 }

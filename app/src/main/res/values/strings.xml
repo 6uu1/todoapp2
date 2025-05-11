@@ -8,4 +8,12 @@
     <string name="add_event">Add Event</string>
     <string name="title_ai_settings">AI 设置</string>
     <string name="title_ai_planner">AI 规划</string>
+    <string name="add_todo_item">Add Todo Item</string>
+    <string name="title_todo">Todo</string>
+
+    <string-array name="priority_levels">
+        <item>High</item>
+        <item>Medium</item>
+        <item>Low</item>
+    </string-array>
 </resources>

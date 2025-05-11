@@ -3,13 +3,15 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="title_calendar">Calendar</string>
+    <string name="title_calendar_gantt">日历与甘特图</string>
     <string name="title_gantt">Gantt</string>
     <string name="add_event">Add Event</string>
     <string name="title_ai_settings">AI 设置</string>
     <string name="title_ai_planner">AI 规划</string>
+    <string name="title_timer_reflection">计时与反思</string>
+    <string name="title_settings">设置</string>
     <string name="add_todo_item">Add Todo Item</string>
-    <string name="title_todo">Todo</string>
+    <string name="title_todo">待办事项</string>
     <string name="todo_page_title">今天打算要干的事</string>
     <string name="ai_suggestion_button_text">AI建议</string>
     <string name="menu">Menu</string>

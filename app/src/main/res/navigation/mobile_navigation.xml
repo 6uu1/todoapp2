@@ -3,8 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_todo">
 
+    <fragment
+        android:id="@+id/navigation_todo"
+        android:name="com.todo.mygo.todo.ui.TodoFragment"
+        android:label="@string/title_todo"
+        tools:layout="@layout/fragment_todo" />
+
+    <fragment
+        android:id="@+id/navigation_calendar_gantt"
+        android:name="com.todo.mygo.calendar.ui.CalendarFragment"
+        android:label="@string/title_calendar_gantt"
+        tools:layout="@layout/fragment_calendar" />
+
+    <fragment
+        android:id="@+id/navigation_ai_planner"
+        android:name="com.todo.mygo.ai_planner.ui.AiTaskPlannerFragment"
+        android:label="@string/title_ai_planner"
+        tools:layout="@layout/fragment_ai_task_planner" />
+
+    <!-- Placeholder for Timer & Reflection Fragment -->
+    <fragment
+        android:id="@+id/navigation_timer_reflection"
+        android:name="com.todo.mygo.ui.home.HomeFragment"
+        android:label="@string/title_timer_reflection"
+        tools:layout="@layout/fragment_home" />
+
+    <!-- Placeholder for Settings Fragment (using AiProviderSettingsFragment temporarily) -->
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.todo.mygo.ai_settings.ui.AiProviderSettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_ai_provider_settings" />
+
+    <!-- Keep existing fragments that are not part of bottom navigation but might be used elsewhere -->
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.todo.mygo.ui.home.HomeFragment"
@@ -22,34 +55,10 @@
         android:name="com.todo.mygo.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
-
-    <fragment
-        android:id="@+id/navigation_calendar"
-        android:name="com.todo.mygo.calendar.ui.CalendarFragment"
-        android:label="@string/title_calendar"
-        tools:layout="@layout/fragment_calendar" />
-
-    <fragment
-        android:id="@+id/navigation_todo"
-        android:name="com.todo.mygo.todo.ui.TodoFragment"
-        android:label="@string/title_todo"
-        tools:layout="@layout/fragment_todo" />
-
+    
     <fragment
         android:id="@+id/navigation_gantt"
         android:name="com.todo.mygo.gantt.GanttFragment"
         android:label="@string/title_gantt"
         tools:layout="@layout/fragment_gantt" />
-
-    <fragment
-        android:id="@+id/navigation_ai_settings"
-        android:name="com.todo.mygo.ai_settings.ui.AiProviderSettingsFragment"
-        android:label="@string/title_ai_settings"
-        tools:layout="@layout/fragment_ai_provider_settings" />
-
-    <fragment
-        android:id="@+id/navigation_ai_planner"
-        android:name="com.todo.mygo.ai_planner.ui.AiTaskPlannerFragment"
-        android:label="@string/title_ai_planner"
-        tools:layout="@layout/fragment_ai_task_planner" />
 </navigation>

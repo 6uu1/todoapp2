@@ -6,4 +6,6 @@
     <string name="title_calendar">Calendar</string>
     <string name="title_gantt">Gantt</string>
     <string name="add_event">Add Event</string>
+    <string name="title_ai_settings">AI 设置</string>
+    <string name="title_ai_planner">AI 规划</string>
 </resources>

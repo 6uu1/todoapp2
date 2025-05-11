@@ -62,6 +62,13 @@ dependencies {
     // MPAndroidChart
     implementation(libs.mpandroidchart)
 
+    // Network & JSON
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp.core)
+    implementation(libs.okhttp.logging.interceptor) // Optional: for logging
+    implementation(libs.gson)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -34,4 +34,16 @@
         android:name="com.todo.mygo.gantt.GanttFragment"
         android:label="@string/title_gantt"
         tools:layout="@layout/fragment_gantt" />
+
+    <fragment
+        android:id="@+id/navigation_ai_settings"
+        android:name="com.todo.mygo.ai_settings.ui.AiProviderSettingsFragment"
+        android:label="@string/title_ai_settings"
+        tools:layout="@layout/fragment_ai_provider_settings" />
+
+    <fragment
+        android:id="@+id/navigation_ai_planner"
+        android:name="com.todo.mygo.ai_planner.ui.AiTaskPlannerFragment"
+        android:label="@string/title_ai_planner"
+        tools:layout="@layout/fragment_ai_task_planner" />
 </navigation>

@@ -1,11 +1,17 @@
 package com.todo.mygo.calendar.data
 
 import androidx.lifecycle.LiveData
+import com.todo.mygo.gantt.data.PlannedTask
+import com.todo.mygo.gantt.data.PlannedTaskDao
 
-class CalendarRepository(private val eventDao: EventDao) {
+class CalendarRepository(
+    private val eventDao: EventDao,
+    private val plannedTaskDao: PlannedTaskDao // Added PlannedTaskDao
+) {
 
     val allEvents: LiveData<List<Event>> = eventDao.getAllEvents()
 
+    // Event methods
     suspend fun insertEvent(event: Event): Long {
         return eventDao.insertEvent(event)
     }
@@ -44,5 +50,18 @@ class CalendarRepository(private val eventDao: EventDao) {
 
     fun getEventsByTag(tagName: String): LiveData<List<Event>> {
         return eventDao.getEventsByTag(tagName) // DAO handles wildcard for tag search
+    }
+
+    // PlannedTask methods
+    fun getAllPlannedTasks(): LiveData<List<PlannedTask>> {
+        return plannedTaskDao.getAllPlannedTasks()
+    }
+
+    suspend fun insertPlannedTasks(tasks: List<PlannedTask>) {
+        plannedTaskDao.insertPlannedTasks(tasks)
+    }
+
+    suspend fun clearAllPlannedTasks() {
+        plannedTaskDao.clearAllPlannedTasks()
     }
 }

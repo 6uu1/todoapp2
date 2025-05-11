@@ -26,8 +26,11 @@ class CalendarViewModel(application: Application) : AndroidViewModel(application
     val selectedDate: LiveData<Date> = _selectedDate
 
     init {
-        val eventDao = CalendarDatabase.getDatabase(application).eventDao()
-        repository = CalendarRepository(eventDao)
+        val database = CalendarDatabase.getDatabase(application)
+        val eventDao = database.eventDao()
+        val plannedTaskDao = database.plannedTaskDao()
+        val todoDao = database.todoDao()
+        repository = CalendarRepository(eventDao, plannedTaskDao, todoDao)
         allEvents = repository.allEvents
         // Observe selectedDate changes to update events
         _selectedDate.observeForever { date ->

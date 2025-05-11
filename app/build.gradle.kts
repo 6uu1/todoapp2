@@ -58,7 +58,6 @@ dependencies {
     implementation(libs.androidx.room.ktx) // Kotlin Extensions and Coroutines support for Room
 
     // Lifecycle components
-    implementation(libs.androidx.lifecycle.extensions) // For ViewModelProviders and other lifecycle utilities
     implementation(libs.androidx.lifecycle.common.java8) // For DefaultLifecycleObserver
 
     // MPAndroidChart

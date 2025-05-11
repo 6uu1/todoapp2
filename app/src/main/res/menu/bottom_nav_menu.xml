@@ -18,7 +18,7 @@
 
     <item
         android:id="@+id/navigation_timer_reflection"
-        android:icon="@android:drawable/ic_lock_idle_timer"
+        android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_timer_reflection" />
 
     <item

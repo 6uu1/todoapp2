@@ -1,4 +1,4 @@
-package com.todo.mygo.todo.ui
+ package com.todo.mygo.todo.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +22,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.todo.mygo.R
+import com.todo.mygo.databinding.FragmentTodoBinding // Import ViewBinding
 import com.todo.mygo.todo.data.TodoItem
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -31,22 +34,26 @@ class TodoFragment : Fragment() {
 
     private val todoViewModel: TodoViewModel by viewModels()
     private lateinit var todoAdapter: TodoAdapter
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var fabAddTodo: FloatingActionButton
+    // private lateinit var recyclerView: RecyclerView // Replaced by ViewBinding
+    // private lateinit var fabAddTodo: FloatingActionButton // Replaced by ViewBinding
+
+    private var _binding: FragmentTodoBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_todo, container, false)
-        recyclerView = view.findViewById(R.id.rv_todo_items)
-        fabAddTodo = view.findViewById(R.id.fab_add_todo)
-        return view
+    ): View {
+        _binding = FragmentTodoBinding.inflate(inflater, container, false)
+        // recyclerView = binding.rvTodoItems // Access via binding
+        // fabAddTodo = binding.fabAddTodo // Access via binding
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupToolbar()
         setupRecyclerView()
 
         todoViewModel.allTodoItems.observe(viewLifecycleOwner) { todos ->
@@ -60,11 +67,21 @@ class TodoFragment : Fragment() {
             }
         }
 
-        fabAddTodo.setOnClickListener {
+        binding.fabAddTodo.setOnClickListener {
             showAddEditTodoDialog(null)
         }
 
+        binding.btnAiSuggestion.setOnClickListener {
+            Toast.makeText(context, "AI Suggestion button clicked (placeholder)", Toast.LENGTH_SHORT).show()
+        }
+
         setupItemTouchHelper()
+    }
+
+    private fun setupToolbar() {
+        (activity as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
+        // Optional: Customize toolbar, e.g., (activity as? AppCompatActivity)?.supportActionBar?.title = "My Todos"
+        // The title is already set in XML, so this might not be needed unless dynamic changes are required.
     }
 
     private fun setupRecyclerView() {
@@ -76,7 +93,7 @@ class TodoFragment : Fragment() {
                 todoViewModel.toggleCompleted(todoItem, isCompleted)
             }
         )
-        recyclerView.apply {
+        binding.rvTodoItems.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = todoAdapter
         }
@@ -203,6 +220,11 @@ class TodoFragment : Fragment() {
                     .setCancelable(false)
                     .show()
             }
-        }).attachToRecyclerView(recyclerView)
+        }).attachToRecyclerView(binding.rvTodoItems)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null // Important to avoid memory leaks
     }
 }

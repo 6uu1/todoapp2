@@ -10,6 +10,13 @@
     <string name="title_ai_planner">AI 规划</string>
     <string name="add_todo_item">Add Todo Item</string>
     <string name="title_todo">Todo</string>
+    <string name="todo_page_title">今天打算要干的事</string>
+    <string name="ai_suggestion_button_text">AI建议</string>
+    <string name="menu">Menu</string>
+    <string name="ai_suggestion">AI Suggestion</string>
+    <string name="switch_to_gantt">Switch to Gantt</string>
+    <string name="switch_to_calendar">Switch to Calendar</string>
+    <string name="add_plan">Add Plan</string>
 
     <string-array name="priority_levels">
         <item>High</item>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_switch_view"
+        android:title="@string/switch_to_gantt"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_add_plan"
+        android:title="@string/add_plan"
+        app:showAsAction="never" />
+</menu>

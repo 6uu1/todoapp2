@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_todo, R.id.navigation_calendar_gantt, R.id.navigation_ai_planner, R.id.navigation_timer_reflection, R.id.navigation_settings
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        // setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 }

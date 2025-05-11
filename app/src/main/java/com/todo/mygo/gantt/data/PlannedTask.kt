@@ -4,7 +4,7 @@ import java.util.UUID
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "planned_task")
 data class PlannedTask(
     @PrimaryKey
     val id: String = UUID.randomUUID().toString(),

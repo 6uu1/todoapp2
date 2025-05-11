@@ -12,7 +12,7 @@ interface PlannedTaskDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPlannedTasks(tasks: List<PlannedTask>)
 
-    @Query("SELECT * FROM planned_task ORDER BY startDate ASC")
+    @Query("SELECT * FROM planned_task ORDER BY startTime ASC")
     fun getAllPlannedTasks(): LiveData<List<PlannedTask>>
 
     @Query("DELETE FROM planned_task")

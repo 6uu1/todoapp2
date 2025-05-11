@@ -3,7 +3,7 @@ package com.todo.mygo.ui.home
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import com.todo.mygo.calendar.data.CalendarDatabase
 import com.todo.mygo.calendar.data.CalendarRepository
 import com.todo.mygo.todo.data.TodoItem
@@ -38,7 +38,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
         val todaysItemsLiveData: LiveData<List<TodoItem>> = repository.getUncompletedTodoItemsForDateRange(startOfDay, endOfDay)
 
-        todaysTodoItemsText = Transformations.map(todaysItemsLiveData) { items ->
+        todaysTodoItemsText = todaysItemsLiveData.map { items ->
             if (items.isNullOrEmpty()) {
                 "今天没有待办事项。"
             } else {

@@ -43,9 +43,9 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.material)
-    implementation("com.google.android.material:material:1.11.0")
+    implementation(libs.material) // This should be the one defined in libs.versions.toml
+    // implementation(libs.androidx.material) // This line was causing the error and is removed.
+    // implementation("com.google.android.material:material:1.11.0") // This line is also redundant.
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)

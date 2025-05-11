@@ -9,10 +9,12 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.todo.mygo.gantt.data.PlannedTask
 import com.todo.mygo.gantt.data.PlannedTaskDao
+import com.todo.mygo.gantt.data.Converters // Added import for Gantt Converters
 import com.todo.mygo.todo.data.TodoItem // Added import
 import com.todo.mygo.todo.data.TodoDao   // Added import
 
 @Database(entities = [Event::class, PlannedTask::class, TodoItem::class], version = 3, exportSchema = false) // Updated entities and version
+@TypeConverters(Converters::class) // Added Converters
 abstract class CalendarDatabase : RoomDatabase() {
 
     abstract fun eventDao(): EventDao

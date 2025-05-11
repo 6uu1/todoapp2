@@ -2,9 +2,11 @@ package com.todo.mygo.gantt.data
 
 import java.util.UUID
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity
 data class PlannedTask(
+    @PrimaryKey
     val id: String = UUID.randomUUID().toString(),
     val name: String,
     val startTime: Long,

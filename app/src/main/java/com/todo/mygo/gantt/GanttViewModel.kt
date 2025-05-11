@@ -16,7 +16,7 @@ class GanttViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         val database = CalendarDatabase.getDatabase(application)
-        calendarRepository = CalendarRepository(database.eventDao(), database.plannedTaskDao())
+        calendarRepository = CalendarRepository(database.eventDao(), database.plannedTaskDao(), database.todoDao())
         plannedTasks = calendarRepository.getAllPlannedTasks()
     }
 

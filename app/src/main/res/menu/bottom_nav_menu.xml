@@ -18,8 +18,8 @@
 
     <item
         android:id="@+id/navigation_calendar"
-        android:icon="@drawable/ic_dashboard_black_24dp" <!-- Consider a unique calendar icon -->
-        android:title="@string/title_calendar" />
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_calendar" /> <!-- Consider a unique calendar icon -->
 
     <item
         android:id="@+id/navigation_todo"

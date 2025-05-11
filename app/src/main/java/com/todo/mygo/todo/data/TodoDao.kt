@@ -33,4 +33,7 @@ interface TodoDao {
 
     @Query("SELECT * FROM todo_items WHERE parentId = :parentId ORDER BY priority ASC, dueDate ASC, creationDate DESC")
     fun getTodoItemsByParentId(parentId: String): LiveData<List<TodoItem>>
+
+    @Query("SELECT * FROM todo_items WHERE dueDate >= :startOfDay AND dueDate <= :endOfDay AND isCompleted = 0 ORDER BY priority ASC, dueDate ASC")
+    fun getUncompletedTodoItemsForDateRange(startOfDay: Long, endOfDay: Long): LiveData<List<TodoItem>>
 }

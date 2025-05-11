@@ -98,4 +98,8 @@ class CalendarRepository(
     fun getTodoItemsByParentId(parentId: String): LiveData<List<TodoItem>> {
         return todoDao.getTodoItemsByParentId(parentId)
     }
+
+    fun getUncompletedTodoItemsForDateRange(startOfDay: Long, endOfDay: Long): LiveData<List<TodoItem>> {
+        return todoDao.getUncompletedTodoItemsForDateRange(startOfDay, endOfDay)
+    }
 }

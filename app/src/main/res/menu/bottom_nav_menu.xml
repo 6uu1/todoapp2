@@ -23,7 +23,7 @@
 
     <item
         android:id="@+id/navigation_todo"
-        android:icon="@android:drawable/ic_menu_agenda" <!-- Placeholder, replace with actual icon -->
+        android:icon="@android:drawable/ic_menu_agenda"
         android:title="@string/title_todo" />
 
     <!-- Commented out items to reduce count to 5 -->

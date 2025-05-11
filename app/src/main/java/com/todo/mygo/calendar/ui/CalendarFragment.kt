@@ -27,6 +27,7 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
+import kotlin.collections.joinToString
 
 class CalendarFragment : Fragment() {
 
@@ -188,7 +189,7 @@ class CalendarFragment : Fragment() {
                 startTime = selectedStartTime.timeInMillis,
                 endTime = selectedEndTime.timeInMillis,
                 priority = priority,
-                category = category,
+                category = category.firstOrNull(),
                 tags = tags
             )
 

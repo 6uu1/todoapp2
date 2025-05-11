@@ -162,6 +162,19 @@
             android:layout_marginBottom="16dp"/>
 
         <Button
+            android:id="@+id/deleteButton"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="删除"
+            android:textColor="?attr/colorError"
+            app:strokeColor="?attr/colorError"
+            app:layout_constraintTop_toTopOf="@id/saveButton"
+            app:layout_constraintBottom_toBottomOf="@id/saveButton"
+            app:layout_constraintEnd_toStartOf="@id/cancelButton" />
+
+        <Button
             android:id="@+id/cancelButton"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"

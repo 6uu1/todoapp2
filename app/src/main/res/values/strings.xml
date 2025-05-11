@@ -5,4 +5,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_calendar">Calendar</string>
     <string name="title_gantt">Gantt</string>
+    <string name="add_event">Add Event</string>
 </resources>

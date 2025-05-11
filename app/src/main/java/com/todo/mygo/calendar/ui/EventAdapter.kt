@@ -3,6 +3,7 @@ package com.todo.mygo.calendar.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,50 +14,37 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class EventAdapter(private val onItemClicked: (Event) -> Unit) :
-    ListAdapter<Event, EventAdapter.EventViewHolder>(EventDiffCallback()) {
+class EventAdapter(
+    private val onItemClicked: (Event) -> Unit,
+    private val onDeleteClicked: (Event) -> Unit
+) : ListAdapter<Event, EventAdapter.EventViewHolder>(EventDiffCallback()) {
+
+    private val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
-        // TODO: Replace with actual item_event.xml layout inflation
-        // val view = LayoutInflater.from(parent.context).inflate(R.layout.item_event, parent, false)
-        // return EventViewHolder(view)
-
-        // For now, using a simple TextView as a placeholder for the item layout
-        val textView = TextView(parent.context)
-        textView.layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        textView.textSize = 16f
-        textView.setPadding(16, 16, 16, 16) // In pixels
-        return EventViewHolder(textView)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_event, parent, false) // Use the new item_event.xml
+        return EventViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         val event = getItem(position)
-        holder.bind(event)
+        holder.bind(event, timeFormat)
         holder.itemView.setOnClickListener { onItemClicked(event) }
+        holder.deleteButton.setOnClickListener { onDeleteClicked(event) }
     }
 
     class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // TODO: Get references to views in item_event.xml if not using a simple TextView
-        // private val titleTextView: TextView = itemView.findViewById(R.id.eventItemTitle)
-        // private val timeTextView: TextView = itemView.findViewById(R.id.eventItemTime)
+        private val titleTextView: TextView = itemView.findViewById(R.id.eventTitleTextView)
+        private val timeTextView: TextView = itemView.findViewById(R.id.eventTimeTextView)
+        val deleteButton: ImageButton = itemView.findViewById(R.id.deleteEventButton) // Made public for adapter access
 
-        fun bind(event: Event) {
-            // This assumes itemView is the TextView itself (placeholder implementation)
-            val itemTextView = itemView as TextView
-
-            val sdfTime = SimpleDateFormat("HH:mm", Locale.getDefault())
-            val startTime = sdfTime.format(Date(event.startTime))
-            val endTime = sdfTime.format(Date(event.endTime))
-
-            // TODO: Populate actual views from item_event.xml
-            // titleTextView.text = event.title
-            // timeTextView.text = "$startTime - $endTime"
-            // itemView.setBackgroundColor(if (event.priority > 0) Color.YELLOW else Color.TRANSPARENT) // Example
-
-            itemTextView.text = "${event.title} ($startTime - $endTime)" // Placeholder
+        fun bind(event: Event, timeFormat: SimpleDateFormat) {
+            titleTextView.text = event.title
+            val startTime = timeFormat.format(Date(event.startTime))
+            val endTime = timeFormat.format(Date(event.endTime))
+            timeTextView.text = "$startTime - $endTime"
+            // You can add more visual cues here, e.g., based on priority
         }
     }
 }

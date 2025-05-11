@@ -127,7 +127,7 @@ class CalendarFragment : Fragment() {
             endTimeTextView.text = dateTimeFormat.format(event.endTime)
             prioritySpinner.setSelection(event.priority) // Assuming priority is 0, 1, 2
             categoryEditText.setText(event.category)
-            tagsEditText.setText(event.tags.joinToString(", "))
+            tagsEditText.setText(event.tags ?: "")
             // deleteButton.visibility = View.VISIBLE // Show delete for existing events
         } else {
             // For new events, default start time to selected date on calendar or current time
@@ -189,8 +189,8 @@ class CalendarFragment : Fragment() {
                 startTime = selectedStartTime.timeInMillis,
                 endTime = selectedEndTime.timeInMillis,
                 priority = priority,
-                category = category.firstOrNull(),
-                tags = tags
+                category = category.firstOrNull()?.toString(),
+                tags = tags.joinToString(", ")
             )
 
             if (event == null) {

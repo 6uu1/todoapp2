@@ -19,6 +19,17 @@
             app:title="@string/todo_page_title"
             app:layout_scrollFlags="scroll|enterAlways" />
 
+        <TextView
+            android:id="@+id/tv_current_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:textAppearance="?attr/textAppearanceListItemSecondary"
+            tools:text="2024年5月13日 星期一" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView

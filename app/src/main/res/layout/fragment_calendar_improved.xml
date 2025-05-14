@@ -175,6 +175,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="@color/teal_700"
         app:strokeWidth="1dp"
-        app:textColor="@android:color/white" />
+        android:textColor="@android:color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

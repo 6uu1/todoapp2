@@ -12,14 +12,19 @@ import com.todo.mygo.gantt.data.PlannedTaskDao
 import com.todo.mygo.gantt.data.Converters // Added import for Gantt Converters
 import com.todo.mygo.todo.data.TodoItem // Added import
 import com.todo.mygo.todo.data.TodoDao   // Added import
+import com.todo.mygo.timer.data.PomodoroSession // Added import for Timer
+import com.todo.mygo.timer.data.TimerRecord // Added import for Timer
+import com.todo.mygo.timer.data.Reflection // Added import for Timer
+import com.todo.mygo.timer.data.TimerDao // Added import for Timer
 
-@Database(entities = [Event::class, PlannedTask::class, TodoItem::class], version = 3, exportSchema = false) // Updated entities and version
+@Database(entities = [Event::class, PlannedTask::class, TodoItem::class, PomodoroSession::class, TimerRecord::class, Reflection::class], version = 4, exportSchema = false) // Updated entities and version
 @TypeConverters(Converters::class) // Added Converters
 abstract class CalendarDatabase : RoomDatabase() {
 
     abstract fun eventDao(): EventDao
     abstract fun plannedTaskDao(): PlannedTaskDao
     abstract fun todoDao(): TodoDao // Added DAO
+    abstract fun timerDao(): TimerDao // Added Timer DAO
 
     companion object {
         @Volatile
@@ -38,12 +43,14 @@ abstract class CalendarDatabase : RoomDatabase() {
             override fun migrate(database: SupportSQLiteDatabase) {
                 // Room will automatically create the new table for TodoItem
                 // because it's added to the entities list and version is incremented.
-                // For complex migrations, you would write SQL here.
-                // Example: database.execSQL("CREATE TABLE IF NOT EXISTS `todo_items` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `description` TEXT, `priority` INTEGER NOT NULL, `dueDate` INTEGER, `isCompleted` INTEGER NOT NULL, `creationDate` INTEGER NOT NULL, `completionDate` INTEGER, `parentId` TEXT, `groupId` TEXT, `tags` TEXT, PRIMARY KEY(`id`))")
-                // However, since `TodoItem` has a `List<String>?` for tags, Room needs a TypeConverter for it.
-                // We'll assume a TypeConverter will be added later if complex types like List<String> are used directly.
-                // For now, let's ensure the table is created.
-                // Room handles this automatically if exportSchema = false and no specific SQL is needed for simple additions.
+            }
+        }
+
+        // Migration from version 3 to 4: Add Timer related tables
+        val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                // Room will automatically create the new tables for PomodoroSession, TimerRecord, and Reflection
+                // because they're added to the entities list and version is incremented.
             }
         }
 
@@ -54,7 +61,7 @@ abstract class CalendarDatabase : RoomDatabase() {
                     CalendarDatabase::class.java,
                     "calendar_database"
                 )
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3) // Added new migration
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4) // Added new migration
                 .build()
                 INSTANCE = instance
                 instance

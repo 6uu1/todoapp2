@@ -23,12 +23,12 @@
         android:label="@string/title_ai_planner"
         tools:layout="@layout/fragment_ai_task_planner" />
 
-    <!-- Placeholder for Timer & Reflection Fragment -->
+    <!-- Timer & Reflection Fragment -->
     <fragment
         android:id="@+id/navigation_timer_reflection"
-        android:name="com.todo.mygo.ui.home.HomeFragment"
+        android:name="com.todo.mygo.timer.ui.TimerReflectionFragment"
         android:label="@string/title_timer_reflection"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_timer_reflection" />
 
     <!-- Placeholder for Settings Fragment (using AiProviderSettingsFragment temporarily) -->
     <fragment

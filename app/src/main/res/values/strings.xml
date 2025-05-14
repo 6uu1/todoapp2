@@ -20,6 +20,35 @@
     <string name="switch_to_calendar">Switch to Calendar</string>
     <string name="add_plan">Add Plan</string>
 
+    <!-- 计时器相关字符串 -->
+    <string name="pomodoro_timer">番茄计时</string>
+    <string name="regular_timer">正计时</string>
+    <string name="start">开始</string>
+    <string name="pause">暂停</string>
+    <string name="resume">继续</string>
+    <string name="reset">重置</string>
+    <string name="skip">跳过</string>
+    <string name="ready">准备开始</string>
+    <string name="working">工作中</string>
+    <string name="short_break">短休息</string>
+    <string name="long_break">长休息</string>
+    <string name="paused">已暂停</string>
+    <string name="completed_pomodoros">已完成: %d 个番茄</string>
+
+    <!-- 反思相关字符串 -->
+    <string name="today_reflection">今日反思</string>
+    <string name="add_reflection">添加反思</string>
+    <string name="edit_reflection">编辑反思</string>
+    <string name="delete_reflection">删除反思</string>
+    <string name="reflection_hint">写下你的反思...</string>
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="delete">删除</string>
+    <string name="confirm_delete_reflection">确定要删除这条反思记录吗？</string>
+    <string name="reflection_empty_error">反思内容不能为空</string>
+    <string name="reflection_saved">反思已保存</string>
+    <string name="reflection_deleted">反思已删除</string>
+
     <string-array name="priority_levels">
         <item>High</item>
         <item>Medium</item>

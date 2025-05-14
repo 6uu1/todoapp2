@@ -9,13 +9,13 @@
         android:id="@+id/navigation_todo"
         android:name="com.todo.mygo.todo.ui.TodoFragment"
         android:label="@string/title_todo"
-        tools:layout="@layout/fragment_todo" />
+        tools:layout="@layout/fragment_todo_improved" />
 
     <fragment
         android:id="@+id/navigation_calendar_gantt"
         android:name="com.todo.mygo.calendar.ui.CalendarFragment"
         android:label="@string/title_calendar_gantt"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar_improved" />
 
     <fragment
         android:id="@+id/navigation_ai_planner"
@@ -55,7 +55,7 @@
         android:name="com.todo.mygo.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
-    
+
     <fragment
         android:id="@+id/navigation_gantt"
         android:name="com.todo.mygo.gantt.GanttFragment"

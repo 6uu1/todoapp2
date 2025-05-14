@@ -22,7 +22,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.todo.mygo.R
-import com.todo.mygo.databinding.FragmentTodoBinding // Import ViewBinding
+import com.todo.mygo.databinding.FragmentTodoImprovedBinding // Import ViewBinding
 import com.todo.mygo.todo.data.TodoItem
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -37,16 +37,20 @@ class TodoFragment : Fragment() {
     // private lateinit var recyclerView: RecyclerView // Replaced by ViewBinding
     // private lateinit var fabAddTodo: FloatingActionButton // Replaced by ViewBinding
 
-    private var _binding: FragmentTodoBinding? = null
+    private var _binding: FragmentTodoImprovedBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTodoBinding.inflate(inflater, container, false)
-        // recyclerView = binding.rvTodoItems // Access via binding
-        // fabAddTodo = binding.fabAddTodo // Access via binding
+        _binding = FragmentTodoImprovedBinding.inflate(inflater, container, false)
+
+        // 设置当前日期
+        val today = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("M月d日 EEEE", Locale.CHINESE)
+        binding.tvCurrentDate.text = dateFormat.format(today.time)
+
         return binding.root
     }
 
@@ -79,9 +83,7 @@ class TodoFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        (activity as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
-        // Optional: Customize toolbar, e.g., (activity as? AppCompatActivity)?.supportActionBar?.title = "My Todos"
-        // The title is already set in XML, so this might not be needed unless dynamic changes are required.
+        // 在新的布局中不需要设置ActionBar
     }
 
     private fun setupRecyclerView() {
@@ -91,6 +93,17 @@ class TodoFragment : Fragment() {
             },
             onToggleCompleted = { todoItem, isCompleted ->
                 todoViewModel.toggleCompleted(todoItem, isCompleted)
+            },
+            onToggleStarred = { todoItem, isStarred ->
+                // 这里我们临时使用优先级来表示星标状态
+                val newPriority = if (isStarred) 1 else 2
+                val updatedItem = todoItem.copy(priority = newPriority)
+                todoViewModel.update(updatedItem)
+                Toast.makeText(
+                    context,
+                    if (isStarred) "已标记为重要" else "已取消重要标记",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         )
         binding.rvTodoItems.apply {

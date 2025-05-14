@@ -1,13 +1,12 @@
 package com.todo.mygo.todo.ui
 
-import android.graphics.Color
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageButton
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -19,67 +18,78 @@ import java.util.Locale
 
 class TodoAdapter(
     private val onItemClicked: (TodoItem) -> Unit,
-    private val onToggleCompleted: (TodoItem, Boolean) -> Unit
+    private val onToggleCompleted: (TodoItem, Boolean) -> Unit,
+    private val onToggleStarred: ((TodoItem, Boolean) -> Unit)? = null
 ) : ListAdapter<TodoItem, TodoAdapter.TodoViewHolder>(TodoDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_todo, parent, false)
+            .inflate(R.layout.item_todo_improved, parent, false)
         return TodoViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, onItemClicked, onToggleCompleted)
+        holder.bind(item, onItemClicked, onToggleCompleted, onToggleStarred)
     }
 
     class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val titleTextView: TextView = itemView.findViewById(R.id.tv_todo_title)
-        private val dueDateTextView: TextView = itemView.findViewById(R.id.tv_todo_due_date)
-        private val completedCheckBox: CheckBox = itemView.findViewById(R.id.cb_todo_completed)
-        private val priorityIndicator: View = itemView.findViewById(R.id.view_priority_indicator)
+        private val titleTextView: TextView = itemView.findViewById(R.id.tvTodoTitle)
+        private val categoryTextView: TextView = itemView.findViewById(R.id.tvTodoCategory)
+        private val completedCheckBox: CheckBox = itemView.findViewById(R.id.cbTodoCompleted)
+        private val starButton: ImageButton = itemView.findViewById(R.id.btnStar)
 
         fun bind(
             todoItem: TodoItem,
             onItemClicked: (TodoItem) -> Unit,
-            onToggleCompleted: (TodoItem, Boolean) -> Unit
+            onToggleCompleted: (TodoItem, Boolean) -> Unit,
+            onToggleStarred: ((TodoItem, Boolean) -> Unit)?
         ) {
             titleTextView.text = todoItem.title
             completedCheckBox.isChecked = todoItem.isCompleted
 
+            // 设置类别文本（使用描述或优先级）
+            val categoryText = when {
+                !todoItem.description.isNullOrEmpty() -> todoItem.description
+                else -> getCategoryFromPriority(todoItem.priority)
+            }
+            categoryTextView.text = categoryText
+
+            // 设置完成状态的样式
             if (todoItem.isCompleted) {
                 titleTextView.paintFlags = titleTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-                dueDateTextView.paintFlags = dueDateTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                categoryTextView.paintFlags = categoryTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             } else {
                 titleTextView.paintFlags = titleTextView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-                dueDateTextView.paintFlags = dueDateTextView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                categoryTextView.paintFlags = categoryTextView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
             }
 
-            if (todoItem.dueDate != null && todoItem.dueDate > 0) {
-                val sdf = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
-                dueDateTextView.text = "Due: ${sdf.format(Date(todoItem.dueDate))}"
-                dueDateTextView.visibility = View.VISIBLE
-            } else {
-                dueDateTextView.visibility = View.GONE
-            }
+            // 设置星标状态（这里假设TodoItem有isStarred属性，如果没有可以添加）
+            val isStarred = todoItem.priority == 1 // 临时使用优先级1作为星标状态
+            starButton.setImageResource(
+                if (isStarred) R.drawable.ic_star_filled_24dp else R.drawable.ic_star_border_24dp
+            )
 
-            when (todoItem.priority) {
-                1 -> priorityIndicator.backgroundTintList =
-                    ContextCompat.getColorStateList(itemView.context, android.R.color.holo_red_dark) // High
-                2 -> priorityIndicator.backgroundTintList =
-                    ContextCompat.getColorStateList(itemView.context, android.R.color.holo_orange_light) // Medium
-                3 -> priorityIndicator.backgroundTintList =
-                    ContextCompat.getColorStateList(itemView.context, android.R.color.holo_green_light) // Low
-                else -> priorityIndicator.backgroundTintList =
-                    ContextCompat.getColorStateList(itemView.context, android.R.color.darker_gray) // Default
-            }
-
+            // 设置点击事件
             itemView.setOnClickListener {
                 onItemClicked(todoItem)
             }
 
             completedCheckBox.setOnCheckedChangeListener { _, isChecked ->
                 onToggleCompleted(todoItem, isChecked)
+            }
+
+            starButton.setOnClickListener {
+                onToggleStarred?.invoke(todoItem, !isStarred)
+            }
+        }
+
+        private fun getCategoryFromPriority(priority: Int): String {
+            return when (priority) {
+                1 -> "重要"
+                2 -> "一般"
+                3 -> "次要"
+                else -> "任务"
             }
         }
     }
